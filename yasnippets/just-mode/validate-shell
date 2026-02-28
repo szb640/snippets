@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: validate-shell
+# key: vshell
+# --
+
+${validate-shell}:
+    find . -name "*.sh" -execdir shellcheck -x {} \;

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ensure-aws-login
+# key: aws
+# --
+
+[private]
+${1:ensure-aws-login}:
+    #!/usr/bin/env bash
+    aws sts get-caller-identity 2>/dev/null 1>&2 || aws sso login

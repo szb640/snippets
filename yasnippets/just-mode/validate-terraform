@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: validate-terraform
+# key: vtf
+# --
+
+${1:validate-terraform}:
+    tflint --recursive --color
+    terraform validate
+    terraform fmt -diff -check -recursive

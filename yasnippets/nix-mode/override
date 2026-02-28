@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: override
+# key: override
+# --
+
+(final: prev: {
+  ${1:package} = prev.$1.overrideAttrs {
+    version = "${2:0.0.1}";
+    src = prev.fetchFromGitHub {
+      version = "$2";
+      owner = "$3";
+      repo = "$4";
+      rev = "v$2";
+      hash = "";
+    };
+  };
+})

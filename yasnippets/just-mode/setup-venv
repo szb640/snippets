@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: setup-venv
+# key: setupvenv
+# --
+setup-venv:
+    #!/usr/bin/env bash
+    if [[ ! -d .venv ]]; then
+      python -m venv .venv
+      .venv/bin/pip install terrasnek==0.1.12 checkov
+    fi

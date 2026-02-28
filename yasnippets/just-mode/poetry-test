@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: poetry-test
+# key: poetry
+# --
+
+${1:poetry-test}:
+    poetry run pytest --cov-append --no-cov-on-fail

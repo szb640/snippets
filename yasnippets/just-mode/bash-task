@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: bash-task
+# key: bash
+# --
+
+${1:task}:
+    #!/usr/bin/env bash
+    $0

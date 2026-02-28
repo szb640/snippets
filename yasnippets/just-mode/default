@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: default
+# key: default
+# --
+#!/usr/bin/env -S just --justfile
+
+project_root := justfile_directory()
+
+[private]
+default:
+    @just --list
+
+$1:
+    #!/usr/bin/env bash
+    $0

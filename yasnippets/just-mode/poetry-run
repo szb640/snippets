@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: poetry-run
+# key: poetrun
+# --
+
+${1:poetry}-run:
+    #!/usr/bin/env bash
+    if [[ -n "\$VIRTUAL_ENV" ]]; then
+      . deactivate
+    fi
+    . \$(poetry env info --path)/bin/activate
+    $0

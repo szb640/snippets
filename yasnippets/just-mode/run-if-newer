@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: run-if-newer
+# key: cache
+# --
+
+ARTIFACT_LAST_MODIFIED=\$(find ${2:./out} -type f -printf '%T@\n' 2>/dev/null | sort -n -r | head -n 1)
+ARTIFACT_LAST_MODIFIED=\${ARTIFACT_LAST_MODIFIED:-0}
+SOURCE_LAST_MODIFIED=\$(find ${3:./src} -path $2 -prune -o -type f -printf '%T@\n' | sort -n -r | head -n 1)
+if awk "BEGIN {exit !(\$ARTIFACT_LAST_MODIFIED < \$SOURCE_LAST_MODIFIED)}"; then
+    echo "${4:App} building..."
+    $0
+else
+    echo "$4 already up to date."
+fi

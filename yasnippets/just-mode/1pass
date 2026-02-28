@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: 1pass
+# key: 1pass
+# --
+\$(OP_SERVICE_ACCOUNT_TOKEN=\$(pass user/1password) op read 'op://Programmatic/${1:Name}/${2:Property}')

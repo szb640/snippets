@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: devenv python
+# key: devenvp
+# --
+
+packages = with pkgs; [
+  (python3.withPackages (pyPkgs: with pyPkgs; [
+    jupyter
+  ]))
+];

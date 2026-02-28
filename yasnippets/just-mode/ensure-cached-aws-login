@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: ensure-cached-aws-login
+# key: awsc
+# --
+
+[private]
+${1:ensure-aws-login}:
+    #!/usr/bin/env bash
+    check_login=1
+    if [ -f .aws-login ]; then
+      boot_seconds=$(awk '{print int(\$1)}' /proc/uptime)
+      boot_time="$(($(date +%s) - $boot_seconds))"
+      expiry_deadline="$(($(date +%s) - 14400))"
+      login_time=$(stat -c %Y .aws-login)
+      if [ "$boot_time" -lt "$login_time" ] && [ "$expiry_deadline" -lt "$login_time" ]; then
+        echo "Logged in recently..."
+        check_login=0
+      fi
+    fi
+    if [ "$check_login" -gt 0 ]; then
+      echo "Checking login..."
+      aws sts get-caller-identity 2>/dev/null 1>&2 || aws sso login
+      touch .aws-login
+    fi
