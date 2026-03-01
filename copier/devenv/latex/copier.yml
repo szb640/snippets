@@ -1,3 +1,7 @@
+include_gitignore: true
+
+_exclude:
+  - "{% if not include_gitignore %}.gitignore{% endif %}"
+
 _tasks:
-  - cp -f "{{_copier_conf.src_path}}/../devenv.lock" .
   - direnv allow
