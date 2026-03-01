@@ -1,0 +1,3 @@
+_tasks:
+  - cp -f "{{_copier_conf.src_path}}/../devenv.lock" .
+  - direnv allow
