@@ -1,0 +1,32 @@
+bootstrap_ansible:
+  type: bool
+  default: true
+  help: Create default Ansible project as well?
+
+group_name:
+  type: str
+  default: servers
+  help: What is the name of the first machine group?
+  when: "{{ bootstrap_ansible }}"
+
+machine_name:
+  type: str
+  default: web
+  help: What is the name of the first machine?
+  when: "{{ bootstrap_ansible }}"
+
+role_name:
+  type: str
+  default: webserver
+  help: What is the name of the first role?
+  when: "{{ bootstrap_ansible }}"
+
+_exclude:
+  - "{% if not bootstrap_ansible %}ansible.cfg{% endif %}"
+  - "{% if not bootstrap_ansible %}inventory{% endif %}"
+  - "{% if not bootstrap_ansible %}playbooks{% endif %}"
+  - "{% if not bootstrap_ansible %}roles{% endif %}"
+  - "copier.yml"
+
+_tasks:
+  - direnv allow

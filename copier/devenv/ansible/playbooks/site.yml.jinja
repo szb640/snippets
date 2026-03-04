@@ -1,0 +1,8 @@
+---
+- name: Configure system
+  hosts: "{{ group_name }}"
+  gather_facts: no
+  
+  roles:
+    - role: "{{ role_name }}"
+      tags: "{{ role_name }}"
