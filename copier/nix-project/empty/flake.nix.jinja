@@ -1,0 +1,17 @@
+{% set revision = nixos_revision | default("nixos-unstable", true) -%}
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/{{revision}}";
+  };
+
+  outputs = { self, nixpkgs }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    devShells.${system}.default = pkgs.mkShellNoCC {
+      packages = with pkgs;[
+        # Add packages here
+      ];
+    };
+  };
+}

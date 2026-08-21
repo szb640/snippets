@@ -1,8 +1,0 @@
-.devenv/
-.devenv*
-*.aux
-*.log
-*.out
-*.synctex.gz
-*.pdf
-!.gitkeep
