@@ -1,0 +1,5 @@
+_exclude:
+  - "copier.yml"
+
+_tasks:
+  - direnv allow

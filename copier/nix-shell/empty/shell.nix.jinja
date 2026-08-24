@@ -1,0 +1,13 @@
+{% set revision = nixos_revision | default("nixos-unstable", true) -%}
+let
+  pkgs = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/{{revision}}.tar.gz";
+  }) {
+    system = builtins.currentSystem;
+  };
+in
+pkgs.mkShellNoCC {
+  packages = with pkgs; [
+    # Add packages here
+  ];
+}
