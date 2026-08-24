@@ -1,0 +1,32 @@
+{% set revision = nixos_revision | default("nixos-unstable", true) -%}
+let
+  pkgs = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/{{revision}}.tar.gz";
+  }) {
+    system = builtins.currentSystem;
+  };
+in
+pkgs.mkShellNoCC {
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+    pkgs.zlib
+    pkgs.openssl
+    pkgs.stdenv.cc.cc
+  ];
+
+  packages = with pkgs; [
+    (python312.withPackages (pyPkgs: with pyPkgs; [
+      pip
+    ]))
+  ];
+
+  shellHook = ''
+    if [ ! -d ".venv" ]; then
+      echo "Setting up virtual environment..."
+      python3 -m venv .venv
+      . .venv/bin/activate
+    else
+      echo "Activating virtual environment..."
+      . .venv/bin/activate
+    fi
+  '';
+}
