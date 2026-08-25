@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Activate Python virtual environment
+# key: venv
+# --
+
+#!/usr/bin/env bash
+
+function _ensure_venv {
+    local DIR_NAME=\${1:-.venv}
+    local _force_refresh=0
+    
+    if [ ! -d "$DIR_NAME" ]; then
+        echo "Creating virtual environment..."
+        python -m venv "$DIR_NAME"
+        _force_refresh=1
+    fi
+    
+    echo "Activating virtual environment..."
+    . "$DIR_NAME/bin/activate"
+    
+    if [ ! -e "requirements.txt" ]; then
+        echo "No requirements file found, skipping setup..."
+        exit 0
+    fi
+    
+    if [ "$_force_refresh" -eq 1 ] || [ "requirements.txt" -nt "$DIR_NAME" ]; then
+        echo "Installing virtual environment..."
+        pip install -r requirements.txt
+        touch "$DIR_NAME"
+    else
+        echo "Existing environment up-to-date"
+    fi
+}
+
+_ensure_venv "$@"
+unset -f _ensure_venv
