@@ -26,7 +26,7 @@ function _ensure_venv {
     if [ "$_force_refresh" -eq 1 ] || [ "requirements.txt" -nt "$DIR_NAME" ]; then
         echo "Installing virtual environment..."
         pip install -r requirements.txt
-        touch "$DIR_NAME"
+        touch -c "$DIR_NAME"
     else
         echo "Existing environment up-to-date"
     fi
